@@ -81,13 +81,15 @@ var ImageGrid = React.createClass({
         };
     },
     componentWillUnmount: function componentWillUnmount() {
+        var that = this;
         _.each(imageElements, function (imageElement) {
-            imageElement.removeEventListener('load', imageLoadCallback(imageElement.id, this.recalculateGrid));
+            imageElement.removeEventListener('load', imageLoadCallback(imageElement.id, that.recalculateGrid));
         });
     },
     componentDidMount: function componentDidMount() {
+        var that = this;
         _.each(this.state.imagesToShow, function (image, index) {
-            getImageDimensions(image.path, image.id, this.recalculateGrid);
+            getImageDimensions(image.path, image.id, that.recalculateGrid);
         }, this);
 
         // only set it to parents width/height if no gridsize is provided
